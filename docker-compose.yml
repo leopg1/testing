@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  maze_robot:
+    build: .
+    privileged: true
+    network_mode: "host"
+    volumes:
+      - /dev:/dev
+      - /sys:/sys
+      - ./logs:/workspace/logs
+      - ./maps:/workspace/maps
+    environment:
+      - DISPLAY=${DISPLAY}
+    command: /bin/bash -c "source /opt/ros/humble/setup.bash && source /workspace/install/setup.bash && ./start_maze_robot.sh"
